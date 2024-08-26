@@ -4,6 +4,7 @@ import React from "react";
 const Pagination = ({ links }) => {
     const paginationLinks = links.map((link, index) => (
         <Link
+            preserveScroll
             key={link.label} 
             href={link.url || "#"} 
             className={

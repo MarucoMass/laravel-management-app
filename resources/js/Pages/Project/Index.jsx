@@ -1,4 +1,5 @@
 import Pagination from "@/Components/Pagination";
+import { PROJECT_STATUS_TEXT_MAP, PROJECT_STATUS_CLASS_MAP } from "@/constants";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
 import React from "react";
@@ -19,7 +20,7 @@ const Index = ({ auth, projects }) => {
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900 dark:text-gray-100">
                             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-2 border-gray-500">
+                                <thead className="text-base text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-2 border-gray-500">
                                     <tr className="text-nowrap">
                                         <th className="px-3 py-2">id</th>
                                         <th className="px-3 py-2">image</th>
@@ -32,14 +33,16 @@ const Index = ({ auth, projects }) => {
                                         <th className="px-3 py-2">
                                             created by
                                         </th>
-                                        <th className="px-3 py-2 text-right">actions</th>
+                                        <th className="px-3 py-2 text-right">
+                                            actions
+                                        </th>
                                     </tr>
                                 </thead>
-                                <tbody className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-transparent dark:text-gray-400 border-b-2 border-gray-500">
+                                <tbody className="text-base text-gray-700 uppercase bg-gray-50 dark:bg-transparent dark:text-gray-400 border-b-2 border-gray-500">
                                     {projects.data.map((project) => (
                                         <tr
                                             key={project.id}
-                                            className="text-nowrap"
+                                            className="text-nowrap normal-case"
                                         >
                                             <td className="px-3 py-2">
                                                 {project.id}
@@ -48,14 +51,27 @@ const Index = ({ auth, projects }) => {
                                                 <img
                                                     src={project.image_path}
                                                     alt="img"
-                                                    style={{ width: 160 }}
+                                                    className="w-32 min-w-32"
                                                 />
                                             </td>
-                                            <td className="px-3 py-2">
+                                            <td className="px-3 py-2 text-wrap">
                                                 {project.name}
                                             </td>
                                             <td className="px-3 py-2">
-                                                {project.status}
+                                                <span
+                                                    className={
+                                                        "py-2 px-3 rounded text-white " +
+                                                        PROJECT_STATUS_CLASS_MAP[
+                                                            project.status
+                                                        ]
+                                                    }
+                                                >
+                                                    {
+                                                        PROJECT_STATUS_TEXT_MAP[
+                                                            project.status
+                                                        ]
+                                                    }
+                                                </span>
                                             </td>
                                             <td className="px-3 py-2">
                                                 {project.created_at}
