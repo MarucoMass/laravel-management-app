@@ -1,5 +1,6 @@
 import Pagination from "@/Components/Pagination";
 import SelectInput from "@/Components/SelectInput";
+import TableHeading from "@/Components/TableHeading";
 import TextInput from "@/Components/TextInput";
 import { PROJECT_STATUS_TEXT_MAP, PROJECT_STATUS_CLASS_MAP } from "@/constants";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
@@ -28,7 +29,7 @@ const Index = ({ auth, projects, queryParams = null }) => {
     };
 
     const handleOrder = (name) => {
-        if(name === queryParams.sort_field){
+        if (name === queryParams.sort_field) {
             if (queryParams.sort_direction === "asc") {
                 queryParams.sort_direction = "desc";
             } else {
@@ -40,7 +41,7 @@ const Index = ({ auth, projects, queryParams = null }) => {
         }
 
         router.get(route("project.index"), queryParams);
-    }
+    };
 
     return (
         <Authenticated
@@ -59,48 +60,64 @@ const Index = ({ auth, projects, queryParams = null }) => {
                             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 <thead className="text-base text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-2 border-gray-500">
                                     <tr className="text-nowrap">
-                                        <th
-                                            onClick={(e) => handleOrder("id")}
-                                            className="px-3 py-2"
-                                        >
-                                            id
-                                        </th>
-                                        <th className="px-3 py-2">image</th>
-                                        <th
-                                            onClick={(e) => handleOrder("name")}
-                                            className="px-3 py-2"
-                                        >
-                                            name
-                                        </th>
-                                        <th
-                                            onClick={(e) =>
-                                                handleOrder("status")
+                                        <TableHeading
+                                            name="id"
+                                            sortField={queryParams.sort_field}
+                                            sortDirection={
+                                                queryParams.sort_direction
                                             }
-                                            className="px-3 py-2"
+                                            handleOrder={handleOrder}
                                         >
-                                            status
-                                        </th>
-                                        <th
-                                            onClick={(e) =>
-                                                handleOrder("created_at")
-                                            }
-                                            className="px-3 py-2"
-                                        >
-                                            created date
-                                        </th>
-                                        <th
-                                            onClick={(e) =>
-                                                handleOrder("due_date")
-                                            }
-                                            className="px-3 py-2"
-                                        >
-                                            due date
-                                        </th>
+                                            ID
+                                        </TableHeading>
                                         <th className="px-3 py-2">
-                                            created by
+                                            IMAGE
+                                        </th>
+                                        <TableHeading
+                                            name="name"
+                                            sortField={queryParams.sort_field}
+                                            sortDirection={
+                                                queryParams.sort_direction
+                                            }
+                                            handleOrder={handleOrder}
+                                        >
+                                            NAME
+                                        </TableHeading>
+                                        <TableHeading
+                                            name="status"
+                                            sortField={queryParams.sort_field}
+                                            sortDirection={
+                                                queryParams.sort_direction
+                                            }
+                                            handleOrder={handleOrder}
+                                        >
+                                            STATUS
+                                        </TableHeading>
+                                        <TableHeading
+                                            name="created_at"
+                                            sortField={queryParams.sort_field}
+                                            sortDirection={
+                                                queryParams.sort_direction
+                                            }
+                                            handleOrder={handleOrder}
+                                        >
+                                            CREATED DATE
+                                        </TableHeading>
+                                        <TableHeading
+                                            name="due_date"
+                                            sortField={queryParams.sort_field}
+                                            sortDirection={
+                                                queryParams.sort_direction
+                                            }
+                                            handleOrder={handleOrder}
+                                        >
+                                            DUE DATE
+                                        </TableHeading>
+                                        <th className="px-3 py-2">
+                                            CREATED BY
                                         </th>
                                         <th className="px-3 py-2 text-right">
-                                            actions
+                                            ACTIONS
                                         </th>
                                     </tr>
                                 </thead>
